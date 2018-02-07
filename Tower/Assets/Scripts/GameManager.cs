@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		Floor testFloor = new Floor ();
+		/*
 		Room r1 = new Room ("r1");
 		Room r2 = new Room ("r2");
 		Room r3 = new Room ("r3");
@@ -22,14 +24,15 @@ public class GameManager : MonoBehaviour {
 		r1.outgoing.Add (r2);
 		r2.outgoing.Add (r3);
 		r3.outgoing.Add (r1);
-
+*/
+		currentRoom = testFloor.floorPlan [0];
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		timer += Time.deltaTime;
 
-		if (timer > 5) {
+		if (timer > 2) {
 			timer = 0;
 			loadRoom (currentRoom.outgoing [0]);
 			Debug.Log (currentRoom.name);
