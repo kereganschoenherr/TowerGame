@@ -7,6 +7,13 @@ public class Character : Creature {
 	public static float baseHealth = 100;
 	public float healthModifier;
 
+	public void setHealth(float healthMod){
+		healthModifier = healthMod;
+		health = healthMod * baseHealth;
+	}
+
+
+
 
 	void Start () {
 		

@@ -10,6 +10,7 @@ public class Room{
 	public bool isCamp;
 	public List<GameObject> enemyReferences;
 	public List<GameObject> enemies;
+	public bool hasCombat;
 
 
 	public Room(string n, bool camp){
@@ -19,10 +20,12 @@ public class Room{
 		enemies = new List<GameObject> ();
 		name = n;
 		isCamp = camp;
+		hasCombat = false;
 	}
 
 	public void addEnemies(List<GameObject> enem){
 		enemyReferences = enem;
+		hasCombat = true;
 	}
 		
 }

@@ -7,13 +7,17 @@ public class GameManager : MonoBehaviour {
 	public Floor currentFloor;
 	public Room currentRoom;
 	public float timer = 0;
-	public Character player;
+	public List<Character> party;
+	public List<Enemy> enemies;
 	public Room camp;
 	public CharacterDictionary cd;
 	public EnemyDictionary ed;
+	public bool gameOver;
+
 
 	// Use this for initialization
 	void Start () {
+		gameOver = false;
 		camp = new Room ("Camp", true);
 		firstLoad (camp);
 
@@ -32,12 +36,12 @@ public class GameManager : MonoBehaviour {
 
 			}
 		} else {
-			timer += Time.deltaTime;
-
-			if (timer > 2) {
-				timer = 0;
+			if (Input.GetKeyDown ("space")) {
 				loadRoom (currentRoom.outgoing [0]);
+			}
 
+			if(currentRoom.hasCombat){
+				runCombat ();
 			}
 		}
 	}
@@ -63,5 +67,9 @@ public class GameManager : MonoBehaviour {
 			currentRoom.enemies.Add (g);
 
 		}
+	}
+
+	void runCombat(){
+		
 	}
 }

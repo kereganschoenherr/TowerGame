@@ -5,6 +5,7 @@ using UnityEngine;
 public class Creature : MonoBehaviour {
 
 	public float health;
+	public float attackDmg;
 
 	void Start () {
 		
