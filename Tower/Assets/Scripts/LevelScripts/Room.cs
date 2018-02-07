@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Room{
+	
+	public List<Room> incoming;
+	public List<Room> outgoing;
+	public string name;
+	public bool isCamp;
+	public List<GameObject> enemyReferences;
+	public List<GameObject> enemies;
+
+
+	public Room(string n, bool camp){
+		incoming = new List<Room> ();
+		outgoing = new List<Room> ();
+		enemyReferences = new List<GameObject> ();
+		enemies = new List<GameObject> ();
+		name = n;
+		isCamp = camp;
+	}
+
+	public void addEnemies(List<GameObject> enem){
+		enemyReferences = enem;
+	}
+		
+}

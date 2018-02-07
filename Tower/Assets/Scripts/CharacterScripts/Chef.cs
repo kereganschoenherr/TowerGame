@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : Creature {
+public class Chef : Character {
+
+
 
 	void Start () {
-		
+		health = baseHealth*healthModifier;
 	}
 	
 
