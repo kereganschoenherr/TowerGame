@@ -8,18 +8,26 @@ public class GameManager : MonoBehaviour {
 	public Room currentRoom;
 	public float timer = 0;
 	public List<Character> party;
-	public List<Enemy> enemies;
+	public List<Enemy> combatEnemies;
+	public List<Creature> combatCreatures;
 	public Room camp;
 	public CharacterDictionary cd;
 	public EnemyDictionary ed;
 	public bool gameOver;
 
+	void initialize(){
+		party = new List<Character> ();
+		combatEnemies = new List<Enemy> ();
+		combatCreatures = new List<Creature> ();
 
+	}
 	// Use this for initialization
 	void Start () {
 		gameOver = false;
 		camp = new Room ("Camp", true);
 		firstLoad (camp);
+
+		initialize ();
 
 		currentFloor = new Floor (camp);
 
@@ -33,7 +41,6 @@ public class GameManager : MonoBehaviour {
 			if (Input.GetKeyDown ("space")) {
 				currentFloor.generateFloorPlan (camp, ed.easy);
 				loadRoom (currentFloor.floorPlan[0]);
-
 			}
 		} else {
 			if (Input.GetKeyDown ("space")) {
@@ -65,11 +72,21 @@ public class GameManager : MonoBehaviour {
 		for (int i = 0; i < r.enemyReferences.Count; i++) {
 			GameObject g = Instantiate (currentRoom.enemyReferences [i]);
 			currentRoom.enemies.Add (g);
-
+			combatEnemies.Add(g.GetComponent<Enemy> ());
 		}
+		for(int i = 0; i < combatEnemies.Count; i++){
+			combatCreatures.Add (combatEnemies[i]);
+		}
+
+		for(int i = 0; i < party.Count; i++){
+			combatCreatures.Add (party[i]);
+		}
+
 	}
 
 	void runCombat(){
 		
 	}
+
+
 }
