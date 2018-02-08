@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour {
 		//deal with old room
 		if (!currentRoom.isCamp) {
 			for (int i = 0; i < currentRoom.enemies.Count; i++) {
-				Destroy (currentRoom.enemies [i]);
+		//		Destroy (currentRoom.enemies [i]);
 			}
 			//Debug.Log ("size after clear " + combatCreatures.Count);
 		}
@@ -92,11 +92,8 @@ public class GameManager : MonoBehaviour {
 
 		if (currentRoom.hasCombat) {
 			for (int i = 0; i < currentRoom.enemyNum; i++) {
-			
-				GameObject g = Instantiate (currentRoom.enemyReferences [Random.Range(0,currentRoom.enemyReferences.Count)]);
-				currentRoom.enemies.Add (g);
+				GameObject g = Instantiate (currentRoom.enemies[i]);
 				combatEnemies.Add (g.GetComponent<Enemy> ());
-
 			}
 		}
 		for(int i = 0; i < combatEnemies.Count; i++){

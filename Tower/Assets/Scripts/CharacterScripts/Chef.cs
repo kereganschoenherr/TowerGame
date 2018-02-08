@@ -7,7 +7,7 @@ public class Chef : Character {
 
 
 	void Start () {
-		setHealth (1f);
+		setHealth (3f);
 		attackDmg = 34;
 		speed = 30;
 

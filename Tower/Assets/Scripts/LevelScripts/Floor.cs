@@ -20,15 +20,24 @@ public class Floor{
 		for (int i = 0; i < roomNum; i++) {
 			
 			Room r = new Room ("Room " + i.ToString (), false, Random.Range(0,3));
-			floorPlan.Add (r);
 
+			// if a room is meant to have enemies in it, give them a reference of enemies to choose from
 			if (r.enemyNum > 0) {
-				
-				floorPlan [i].addEnemies (enemies);
+				r.addEnemies (enemies);
+			}
+			// now that enemiesReferences have been added to the room, randomly decide on the actual list of enemies that will be instantiated once the room is entered.
+			//randomly add references into the Room.enemies until you hit the enemyNum limit
+		for(int j = 0; j < r.enemyNum; j++){
+				r.enemies.Add (r.enemyReferences [Random.Range (0, r.enemyReferences.Count)]);
 			}
 
+			//once the room r is done being constructed. add it to the floorPlan
+
+			floorPlan.Add (r);
+
+
 		}
-		//Create connections
+		//Create connections between rooms 
 		for (int i = 0; i < roomNum; i++) {
 			if (i < roomNum - 1) {
 				floorPlan [i].outgoing.Add (floorPlan [i + 1]);
@@ -36,8 +45,6 @@ public class Floor{
 				floorPlan [i].outgoing.Add (camp);
 			}
 		}
-
-		//floorPlan [roomNum / 2].addEnemies(enemies);
 
 	}
 }
