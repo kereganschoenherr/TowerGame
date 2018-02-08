@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : Enemy {
-
-
+public class Ghoul : Enemy {
 
 	// Use this for initialization
 	void Start () {
-		setHealth (.75f);
+		setHealth (1f);
 		attackDmg = 10;
-		speed = 20;
+		speed = 35;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0) {
-			
-		}
+		
 	}
 }

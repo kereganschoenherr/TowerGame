@@ -15,8 +15,6 @@ public class Chef : Character {
 	
 
 	void Update () {
-		if (health <= 0) {
-			
-		}
+		
 	}
 }

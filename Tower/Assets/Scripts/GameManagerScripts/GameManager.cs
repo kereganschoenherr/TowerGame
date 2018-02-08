@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
 
 
+
 		currentFloor = new Floor (camp);
 
 		cd = GetComponent<CharacterDictionary> ();
@@ -44,22 +45,27 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentRoom.isCamp) {
-			if (Input.GetKeyDown ("space")) {
-				currentFloor.generateFloorPlan (camp, ed.easy);
-				loadRoom (currentFloor.floorPlan[0]);
+		if (!gameOver) {
+			if (party.Count == 0) {
+				Debug.Log ("Game Over.");
+				gameOver = true;
 			}
-		} else {
-			if (Input.GetKeyDown ("space")) {
-				loadRoom (currentRoom.outgoing [0]);
-			}
+			if (currentRoom.isCamp) {
+				if (Input.GetKeyDown ("space")) {
+					currentFloor.generateFloorPlan (camp, ed.easy);
+					loadRoom (currentFloor.floorPlan [0]);
+				}
+			} else {
+				if (Input.GetKeyDown ("space")) {
+					loadRoom (currentRoom.outgoing [0]);
+				}
 
-			if(inCombat){
-				runCombat ();
+				if (inCombat) {
+					runCombat ();
+				}
 			}
 		}
 	}
-
 	void firstLoad(Room r){
 		currentRoom = r;
 		Debug.Log (currentRoom.name);
@@ -68,7 +74,7 @@ public class GameManager : MonoBehaviour {
 	void loadRoom(Room r){
 		//deal with old room
 		if (!currentRoom.isCamp) {
-			for (int i = 0; i < currentRoom.enemyReferences.Count; i++) {
+			for (int i = 0; i < currentRoom.enemies.Count; i++) {
 				Destroy (currentRoom.enemies [i]);
 			}
 			//Debug.Log ("size after clear " + combatCreatures.Count);
@@ -83,18 +89,11 @@ public class GameManager : MonoBehaviour {
 			inCombat = false;
 		}
 		Debug.Log (currentRoom.name);
-		/*
-		for (int i = 0; i < currentRoom.enemyNum; i++) {
-			Debug.Log (currentRoom.enemyReferences.Count);
-			GameObject g = Instantiate (currentRoom.enemyReferences [0]);
-			currentRoom.enemies.Add (g);
-			combatEnemies.Add (g.GetComponent<Enemy>());
-		}
-*/
+
 		if (currentRoom.hasCombat) {
 			for (int i = 0; i < currentRoom.enemyNum; i++) {
 			
-				GameObject g = Instantiate (currentRoom.enemyReferences [0]);
+				GameObject g = Instantiate (currentRoom.enemyReferences [Random.Range(0,currentRoom.enemyReferences.Count)]);
 				currentRoom.enemies.Add (g);
 				combatEnemies.Add (g.GetComponent<Enemy> ());
 

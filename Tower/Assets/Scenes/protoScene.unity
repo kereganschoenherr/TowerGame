@@ -236,6 +236,8 @@ MonoBehaviour:
   cd: {fileID: 0}
   ed: {fileID: 0}
   gameOver: 0
+  turn: 0
+  inCombat: 0
 --- !u!4 &1759962089
 Transform:
   m_ObjectHideFlags: 0
@@ -261,6 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slime: {fileID: 1719642913021782, guid: d378c21ce1e7ec640977347c1bad1a99, type: 2}
+  ghoul: {fileID: 1719642913021782, guid: 80b61d628119046d6918341e52ea5fbe, type: 2}
   easy: []
 --- !u!114 &1759962091
 MonoBehaviour:
@@ -274,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chef: {fileID: 1669386765166666, guid: 40ad2043568cdb94baecfc61e0631e28, type: 2}
+  knight: {fileID: 1669386765166666, guid: eb02cf695887443d18cd57c239904caf, type: 2}
 --- !u!1001 &2042044292
 Prefab:
   m_ObjectHideFlags: 0
