@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  attackDmg: 0
-  speed: 0
-  healthModifier: 0
+  attackDmg: 45
+  speed: 15
+  healthModifier: 1.1
 --- !u!212 &212916777188750838
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 25615972a8c586c4c92c33d6033df99b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.97794116, g: 0.60402244, b: 0.9521537, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

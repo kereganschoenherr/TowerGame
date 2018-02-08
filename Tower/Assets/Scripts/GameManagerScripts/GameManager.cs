@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
 	public bool inCombat;
 
 	void initialize(){
-		party = new List<Character> ();
+		//party = new List<Character> ();
 		combatEnemies = new List<Enemy> ();
 		combatCreatures = new List<Creature> ();
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
 		initialize ();
 		turn = 0;
 
-		party.Add (testPlayer.GetComponent<Chef>());
+		//party.Add (testPlayer.GetComponent<Chef>());
 
 
 
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("Game Over.");
 				gameOver = true;
 			}
-			if (currentRoom.isCamp) {
+			if (currentRoom.isCamp ) {
 				if (Input.GetKeyDown ("space")) {
 					currentFloor.generateFloorPlan (camp, ed.easy);
 					loadRoom (currentFloor.floorPlan [0]);
@@ -74,10 +74,10 @@ public class GameManager : MonoBehaviour {
 	void loadRoom(Room r){
 		//deal with old room
 		if (!currentRoom.isCamp) {
-			for (int i = 0; i < currentRoom.enemies.Count; i++) {
-		//		Destroy (currentRoom.enemies [i]);
+			for (int i = 0; i < combatEnemies.Count; i++) {
+				Destroy (combatEnemies [i].gameObject);
 			}
-			//Debug.Log ("size after clear " + combatCreatures.Count);
+
 		}
 		combatCreatures.Clear ();
 		combatEnemies.Clear ();
@@ -112,12 +112,12 @@ public class GameManager : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Return)) {
 
-	
+			Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
 			if (combatCreatures [turn] is Character) {
 				combatCreatures [turn].attack (combatEnemies [0]);
 				if (combatEnemies [0].health <= 0) {
 					GameObject g = combatEnemies[0].gameObject;
-					combatCreatures.RemoveAt (combatCreatures.IndexOf (combatEnemies [0]));
+					combatCreatures.RemoveAt (0);
 					combatEnemies.RemoveAt (0);
 
 					Destroy (g);
@@ -126,13 +126,15 @@ public class GameManager : MonoBehaviour {
 				combatCreatures [turn].attack (party [0]);
 				if (party [0].health <= 0) {
 					GameObject g = party [0].gameObject;
+					combatCreatures.RemoveAt (0);
 					party.RemoveAt (0);
+
 					Destroy (g);
 				}
 			}
 
 			turn++;
-			if (turn == combatCreatures.Count) {
+			if (turn >= combatCreatures.Count) {
 				turn = 0;
 			}
 			if (combatEnemies.Count == 0 || party.Count == 0) {

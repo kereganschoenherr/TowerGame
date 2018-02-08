@@ -53,9 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  attackDmg: 1
-  isTurn: 0
-  speed: 2
+  attackDmg: 10
+  speed: 20
   healthModifier: 1
 --- !u!212 &212566342872934128
 SpriteRenderer:

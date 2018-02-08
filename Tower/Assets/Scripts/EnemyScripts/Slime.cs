@@ -8,15 +8,13 @@ public class Slime : Enemy {
 
 	// Use this for initialization
 	void Start () {
-		setHealth (.75f);
-		attackDmg = 10;
-		speed = 20;
+		setHealth (healthModifier);
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (health <= 0) {
-			
-		}
+		
 	}
 }
