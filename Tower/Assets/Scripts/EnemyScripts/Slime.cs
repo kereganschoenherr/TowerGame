@@ -10,11 +10,13 @@ public class Slime : Enemy {
 	void Start () {
 		setHealth (1f);
 		attackDmg = 10;
-		speed = 2;
+		speed = 20;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (health <= 0) {
+			
+		}
 	}
 }
