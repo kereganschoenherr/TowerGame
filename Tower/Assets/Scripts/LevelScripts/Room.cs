@@ -11,9 +11,12 @@ public class Room{
 	public List<GameObject> enemyReferences;
 	public List<GameObject> enemies;
 	public bool hasCombat;
+	public int enemyNum;
 
 
-	public Room(string n, bool camp){
+
+	public Room(string n, bool camp, int enemyNum){
+		this.enemyNum = enemyNum;
 		incoming = new List<Room> ();
 		outgoing = new List<Room> ();
 		enemyReferences = new List<GameObject> ();

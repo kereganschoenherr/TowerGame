@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameOver = false;
-		camp = new Room ("Camp", true);
+		camp = new Room ("Camp", true, 0);
 		firstLoad (camp);
 		initialize ();
 		turn = 0;
@@ -83,10 +83,22 @@ public class GameManager : MonoBehaviour {
 			inCombat = false;
 		}
 		Debug.Log (currentRoom.name);
-		for (int i = 0; i < r.enemyReferences.Count; i++) {
-			GameObject g = Instantiate (currentRoom.enemyReferences [i]);
+		/*
+		for (int i = 0; i < currentRoom.enemyNum; i++) {
+			Debug.Log (currentRoom.enemyReferences.Count);
+			GameObject g = Instantiate (currentRoom.enemyReferences [0]);
 			currentRoom.enemies.Add (g);
-			combatEnemies.Add(g.GetComponent<Enemy> ());
+			combatEnemies.Add (g.GetComponent<Enemy>());
+		}
+*/
+		if (currentRoom.hasCombat) {
+			for (int i = 0; i < currentRoom.enemyNum; i++) {
+			
+				GameObject g = Instantiate (currentRoom.enemyReferences [0]);
+				currentRoom.enemies.Add (g);
+				combatEnemies.Add (g.GetComponent<Enemy> ());
+
+			}
 		}
 		for(int i = 0; i < combatEnemies.Count; i++){
 			combatCreatures.Add (combatEnemies[i]);
@@ -109,7 +121,9 @@ public class GameManager : MonoBehaviour {
 				combatCreatures [turn].attack (combatEnemies [0]);
 				if (combatEnemies [0].health <= 0) {
 					GameObject g = combatEnemies[0].gameObject;
+					combatCreatures.RemoveAt (combatCreatures.IndexOf (combatEnemies [0]));
 					combatEnemies.RemoveAt (0);
+
 					Destroy (g);
 				}
 			} else if (combatCreatures [turn] is Enemy) {
@@ -127,6 +141,7 @@ public class GameManager : MonoBehaviour {
 			}
 			if (combatEnemies.Count == 0 || party.Count == 0) {
 				inCombat = false;
+				turn = 0;
 			}
 
 		}

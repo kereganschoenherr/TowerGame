@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Floor{
 
+
 	public List<Room> floorPlan;
 
 	public Floor(Room camp){
 		floorPlan = new List<Room> ();
+
 
 	}
 	public void generateFloorPlan(Room camp, List<GameObject> enemies){
@@ -16,8 +18,15 @@ public class Floor{
 		Debug.Log ("Number of Rooms: " + roomNum.ToString());
 		//Create rooms
 		for (int i = 0; i < roomNum; i++) {
-			Room r = new Room ("Room " + i.ToString (), false);
+			
+			Room r = new Room ("Room " + i.ToString (), false, Random.Range(0,3));
 			floorPlan.Add (r);
+
+			if (r.enemyNum > 0) {
+				
+				floorPlan [i].addEnemies (enemies);
+			}
+
 		}
 		//Create connections
 		for (int i = 0; i < roomNum; i++) {
@@ -28,6 +37,7 @@ public class Floor{
 			}
 		}
 
-		floorPlan [roomNum / 2].addEnemies(enemies);
+		//floorPlan [roomNum / 2].addEnemies(enemies);
+
 	}
 }
