@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
 	public List<Character> party;
 	public List<Enemy> combatEnemies;
 	public List<Creature> combatCreatures;
+	public GameObject testPlayer;
 	public Room camp;
 	public CharacterDictionary cd;
 	public EnemyDictionary ed;
@@ -26,8 +27,11 @@ public class GameManager : MonoBehaviour {
 		gameOver = false;
 		camp = new Room ("Camp", true);
 		firstLoad (camp);
-
 		initialize ();
+
+		party.Add (testPlayer.GetComponent<Chef>());
+
+
 
 		currentFloor = new Floor (camp);
 
@@ -64,8 +68,10 @@ public class GameManager : MonoBehaviour {
 			for (int i = 0; i < currentRoom.enemyReferences.Count; i++) {
 				Destroy (currentRoom.enemies [i]);
 			}
+			//Debug.Log ("size after clear " + combatCreatures.Count);
 		}
-
+		combatCreatures.Clear ();
+		combatEnemies.Clear ();
 		//current room is now updated
 		currentRoom = r;
 		Debug.Log (currentRoom.name);
@@ -81,6 +87,9 @@ public class GameManager : MonoBehaviour {
 		for(int i = 0; i < party.Count; i++){
 			combatCreatures.Add (party[i]);
 		}
+
+		combatCreatures.Sort ();
+		//Debug.Log ("size " + combatCreatures.Count);
 
 	}
 

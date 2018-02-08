@@ -3,23 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Creature : MonoBehaviour, IComparable<Creature>{
+abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 
 	public float health;
 	public float attackDmg;
 	public bool isTurn;
 	public float speed;
 
-	int CompareTo(Creature c1, Creature c2){
-		if (c1.speed > c2.speed) {
-			return 1;
-		} else if (c2.speed < c1.speed) {
+	int IComparable<Creature>.CompareTo(Creature c1){
+		Debug.Log ("wow sorting is cool");
+		if (this.speed > c1.speed) {
 			return -1;
+		} else if (this.speed < c1.speed) {
+			return 1;
 		} else {
 			return 0;
 		}
 	}
 
+	public void attack(Creature c){
+		c.takeDmg (attackDmg);
+	}
+
+	public void takeDmg(float dmg){
+		health -= dmg;
+	}
 
 	void Start () {
 		
