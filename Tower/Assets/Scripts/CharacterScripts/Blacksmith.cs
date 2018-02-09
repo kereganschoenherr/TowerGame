@@ -1,0 +1,18 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Blacksmith : Character {
+
+
+
+	void Start () {
+		setHealth (healthModifier);
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
+}
