@@ -15,4 +15,7 @@ public class Hunter : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : Creature {
+public abstract class Character : Creature {
 
 	public static float baseHealth = 100;
 	public float healthModifier = 1;
@@ -11,6 +11,9 @@ public class Character : Creature {
 		healthModifier = healthMod;
 		health = healthMod * baseHealth;
 	}
+
+
+	public abstract void specialAttack ();
 
 
 

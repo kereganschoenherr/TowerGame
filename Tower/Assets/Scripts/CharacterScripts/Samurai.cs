@@ -15,4 +15,7 @@ public class Samurai : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

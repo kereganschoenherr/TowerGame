@@ -15,4 +15,7 @@ public class Percussionist : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

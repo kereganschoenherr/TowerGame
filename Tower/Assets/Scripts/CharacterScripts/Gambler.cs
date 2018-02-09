@@ -15,4 +15,7 @@ public class Gambler : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

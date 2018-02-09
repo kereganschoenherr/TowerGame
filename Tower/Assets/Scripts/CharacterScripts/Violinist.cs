@@ -15,4 +15,7 @@ public class Violinist : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

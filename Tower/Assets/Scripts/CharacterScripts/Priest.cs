@@ -15,4 +15,7 @@ public class Priest : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

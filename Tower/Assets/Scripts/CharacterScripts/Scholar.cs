@@ -15,4 +15,7 @@ public class Scholar : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

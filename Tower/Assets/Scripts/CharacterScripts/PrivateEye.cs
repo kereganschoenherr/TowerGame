@@ -15,4 +15,7 @@ public class PrivateEye : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour {
 				targetSelection = 0;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Return)) {
+		if (Input.GetKeyDown (KeyCode.Z)) {
 
 			//Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
 			if (combatCreatures [turn] is Character) {

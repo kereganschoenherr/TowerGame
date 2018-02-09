@@ -15,4 +15,7 @@ public class Knight: Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

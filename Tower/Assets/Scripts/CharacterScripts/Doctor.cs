@@ -15,4 +15,7 @@ public class Doctor : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

@@ -15,4 +15,7 @@ public class Dancer : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

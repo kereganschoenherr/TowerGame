@@ -15,4 +15,7 @@ public class DemonSlayer : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

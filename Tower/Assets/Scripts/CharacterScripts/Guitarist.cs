@@ -15,4 +15,7 @@ public class Guitarist : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }

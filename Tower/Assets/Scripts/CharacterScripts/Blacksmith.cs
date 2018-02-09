@@ -15,4 +15,7 @@ public class Blacksmith : Character {
 	void Update () {
 		
 	}
+	public override void specialAttack(){
+
+	}
 }
