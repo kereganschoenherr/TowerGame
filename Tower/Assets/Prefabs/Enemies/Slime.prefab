@@ -55,7 +55,7 @@ MonoBehaviour:
   health: 1
   attackDmg: 10
   speed: 20
-  healthModifier: 1
+  healthModifier: 0.5
 --- !u!212 &212566342872934128
 SpriteRenderer:
   m_ObjectHideFlags: 1

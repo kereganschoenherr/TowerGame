@@ -5,7 +5,7 @@ using UnityEngine;
 public class Character : Creature {
 
 	public static float baseHealth = 100;
-	public float healthModifier;
+	public float healthModifier = 1;
 
 	public void setHealth(float healthMod){
 		healthModifier = healthMod;

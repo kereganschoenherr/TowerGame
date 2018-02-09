@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	public bool inCombat;
 	public List<Vector3> enemyPositions;
 	public List<Vector3> partyPositions;
+	public int floorsClimbed;
 
 	void initialize(){
 		//party = new List<Character> ();
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameOver = false;
+		floorsClimbed = 1;
 		camp = new Room ("Camp", true, 0);
 		firstLoad (camp);
 		initialize ();
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour {
 
 		cd = GetComponent<CharacterDictionary> ();
 		ed = GetComponent<EnemyDictionary> ();
+		setupParty ();
 	}
 	
 	// Update is called once per frame
@@ -70,9 +73,18 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 	}
+	void setupParty(){
+		for (int i = 0; i < 4; i++) {
+			GameObject g = Instantiate (cd.characters [Random.Range(0,cd.characters.Count)]);
+			g.transform.position = partyPositions [i];
+
+			party.Add (g.GetComponent<Character>());
+		}
+	}
 	void firstLoad(Room r){
 		currentRoom = r;
 		Debug.Log (currentRoom.name);
+		Debug.Log ("Current Floor: " + floorsClimbed);
 	}
 
 	void loadRoom(Room r){
@@ -82,17 +94,25 @@ public class GameManager : MonoBehaviour {
 				Destroy (combatEnemies [i].gameObject);
 			}
 
-		}
+		} 
+
 		combatCreatures.Clear ();
 		combatEnemies.Clear ();
 		//current room is now updated
+
 		currentRoom = r;
+
 		if (currentRoom.hasCombat) {
 			inCombat = true;
 		} else {
 			inCombat = false;
 		}
+
 		Debug.Log (currentRoom.name);
+		if(currentRoom.isCamp){
+			floorsClimbed++;
+			Debug.Log ("Current Floor: " + floorsClimbed);
+		}
 
 		if (currentRoom.hasCombat) {
 			for (int i = 0; i < currentRoom.enemyNum; i++) {

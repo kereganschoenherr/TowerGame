@@ -224,9 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  party:
-  - {fileID: 0}
-  - {fileID: 0}
+  party: []
   combatEnemies: []
   combatCreatures: []
   testPlayer: {fileID: 0}
@@ -240,8 +238,11 @@ MonoBehaviour:
   - {x: 5, y: -2.31, z: 0}
   - {x: 8, y: -2.31, z: 0}
   partyPositions:
-  - {x: 0, y: -2.31, z: 0}
-  - {x: 0, y: -2.31, z: 0}
+  - {x: -3, y: -2.31, z: 0}
+  - {x: -4, y: -2.31, z: 0}
+  - {x: -5, y: -2.31, z: 0}
+  - {x: -6, y: -2.31, z: 0}
+  floorsClimbed: 0
 --- !u!4 &1759962089
 Transform:
   m_ObjectHideFlags: 0
@@ -280,5 +281,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce577cb447f78f4fb9dcd586e655d83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chef: {fileID: 1669386765166666, guid: 40ad2043568cdb94baecfc61e0631e28, type: 2}
-  knight: {fileID: 1669386765166666, guid: eb02cf695887443d18cd57c239904caf, type: 2}
+  characters:
+  - {fileID: 1669386765166666, guid: 0f59ce3f0f48d1d4bacfb3d2e5a7b78b, type: 2}
+  - {fileID: 1669386765166666, guid: 40ad2043568cdb94baecfc61e0631e28, type: 2}
+  - {fileID: 1669386765166666, guid: fa52bfc40bc03814e9ae2f62a20ecf9b, type: 2}
+  - {fileID: 1669386765166666, guid: 0259e6b56ebe36a48a1f83cc72c211c4, type: 2}
+  - {fileID: 1669386765166666, guid: bc6cc7d98f2edfc429cc1acab1700974, type: 2}
+  - {fileID: 1669386765166666, guid: de35eb420718962449b98a8a6b796528, type: 2}
+  - {fileID: 1669386765166666, guid: a3389af87c9d7e64797fbc9b5fc41fec, type: 2}
+  - {fileID: 1669386765166666, guid: 4d15f5580421390439b42e3f4412f11d, type: 2}
+  - {fileID: 1669386765166666, guid: eb02cf695887443d18cd57c239904caf, type: 2}
+  - {fileID: 1669386765166666, guid: 0e4025a471ed8fc438cad5702ed91b2d, type: 2}
+  - {fileID: 1669386765166666, guid: d5d91775b31e28e46922db93d1e77344, type: 2}
+  - {fileID: 1669386765166666, guid: 2016e7be4078e9744b3fa5ede8b7ad4c, type: 2}
+  - {fileID: 1669386765166666, guid: 4539351754ef47e4eba12d95b0478f96, type: 2}
+  - {fileID: 1669386765166666, guid: ba98d35c985cabe4d98ab905300d25f3, type: 2}
+  - {fileID: 1669386765166666, guid: 31a7b62484204734697f019d059fe12e, type: 2}

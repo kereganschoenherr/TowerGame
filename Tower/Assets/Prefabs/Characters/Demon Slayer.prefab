@@ -53,9 +53,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  attackDmg: 0
-  speed: 0
-  healthModifier: 0
+  attackDmg: 34
+  speed: 35
+  healthModifier: 1
 --- !u!212 &212916777188750838
 SpriteRenderer:
   m_ObjectHideFlags: 1
