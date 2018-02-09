@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour {
 				targetSelection--;
 			}
 			if (targetSelection < 0) {
-				targetSelection = combatEnemies.Count;
+				targetSelection = combatEnemies.Count - 1;
 			}
 			else if(targetSelection >= combatEnemies.Count){
 				targetSelection = 0;
@@ -130,25 +130,29 @@ public class GameManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown (KeyCode.Return)) {
 
-			Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
+			//Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
 			if (combatCreatures [turn] is Character) {
 				combatCreatures [turn].attack (combatEnemies [targetSelection]);
+				Debug.Log (combatCreatures [turn] + " attacks " + combatEnemies [targetSelection] + " for " + combatCreatures [turn].attackDmg + " damage!");
 				if (combatEnemies [targetSelection].health <= 0) {
+					Debug.Log (combatEnemies [targetSelection] + " is defeated!");
 					GameObject g = combatEnemies[targetSelection].gameObject;
 
-					combatCreatures.RemoveAt (targetSelection);
-					combatEnemies.RemoveAt (targetSelection);
+					combatCreatures.RemoveAt (combatCreatures.IndexOf(g.GetComponent<Creature>()));
+					combatEnemies.RemoveAt (combatEnemies.IndexOf(g.GetComponent<Enemy>()));
 
 					Destroy (g);
 				}
 			} else if (combatCreatures [turn] is Enemy) {
 				combatCreatures [turn].attack (party [0]);
+				Debug.Log (combatCreatures [turn] + " attacks " + party [0] + " for " + combatCreatures [turn].attackDmg + " damage!");
 				if (party [0].health <= 0) {
-					GameObject g = party [0].gameObject;
-					combatCreatures.RemoveAt (0);
-					party.RemoveAt (0);
+					Debug.Log (party [0] + " is defeated! : (");
+					GameObject p = party [0].gameObject;
+					combatCreatures.RemoveAt (combatCreatures.IndexOf(p.GetComponent<Creature>()));
+					party.RemoveAt (party.IndexOf(p.GetComponent<Character>()));
 
-					Destroy (g);
+					Destroy (p);
 				}
 			}
 
