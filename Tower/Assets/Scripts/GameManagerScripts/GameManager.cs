@@ -16,7 +16,10 @@ public class GameManager : MonoBehaviour {
 	public EnemyDictionary ed;
 	public bool gameOver;
 	public int turn;
+	public int targetSelection;
 	public bool inCombat;
+	public List<Vector3> enemyPositions;
+	public List<Vector3> partyPositions;
 
 	void initialize(){
 		//party = new List<Character> ();
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour {
 		firstLoad (camp);
 		initialize ();
 		turn = 0;
+
 
 		//party.Add (testPlayer.GetComponent<Chef>());
 
@@ -93,6 +97,7 @@ public class GameManager : MonoBehaviour {
 		if (currentRoom.hasCombat) {
 			for (int i = 0; i < currentRoom.enemyNum; i++) {
 				GameObject g = Instantiate (currentRoom.enemies[i]);
+				g.transform.position = enemyPositions [i];
 				combatEnemies.Add (g.GetComponent<Enemy> ());
 			}
 		}
@@ -109,16 +114,30 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void runCombat(){
-
+		if (combatCreatures [turn] is Character) {
+			if(Input.GetKeyDown(KeyCode.RightArrow)){
+				targetSelection++;
+			}
+			else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+				targetSelection--;
+			}
+			if (targetSelection < 0) {
+				targetSelection = combatEnemies.Count;
+			}
+			else if(targetSelection >= combatEnemies.Count){
+				targetSelection = 0;
+			}
+		}
 		if (Input.GetKeyDown (KeyCode.Return)) {
 
 			Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
 			if (combatCreatures [turn] is Character) {
-				combatCreatures [turn].attack (combatEnemies [0]);
-				if (combatEnemies [0].health <= 0) {
-					GameObject g = combatEnemies[0].gameObject;
-					combatCreatures.RemoveAt (0);
-					combatEnemies.RemoveAt (0);
+				combatCreatures [turn].attack (combatEnemies [targetSelection]);
+				if (combatEnemies [targetSelection].health <= 0) {
+					GameObject g = combatEnemies[targetSelection].gameObject;
+
+					combatCreatures.RemoveAt (targetSelection);
+					combatEnemies.RemoveAt (targetSelection);
 
 					Destroy (g);
 				}

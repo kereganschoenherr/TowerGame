@@ -293,7 +293,14 @@ MonoBehaviour:
   ed: {fileID: 0}
   gameOver: 0
   turn: 0
+  targetSelection: 0
   inCombat: 0
+  enemyPositions:
+  - {x: 5, y: -2.31, z: 0}
+  - {x: 8, y: -2.31, z: 0}
+  partyPositions:
+  - {x: 0, y: -2.31, z: 0}
+  - {x: 0, y: -2.31, z: 0}
 --- !u!4 &1759962089
 Transform:
   m_ObjectHideFlags: 0
