@@ -16,6 +16,6 @@ public class Priest : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

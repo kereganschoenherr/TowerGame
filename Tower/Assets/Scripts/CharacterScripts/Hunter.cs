@@ -16,6 +16,6 @@ public class Hunter : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

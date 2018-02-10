@@ -148,34 +148,52 @@ public class GameManager : MonoBehaviour {
 				targetSelection = 0;
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.Z)) {
 
-			//Debug.Log ("combat creatures : " + combatCreatures.Count + "| turn#: " + turn);
-			if (combatCreatures [turn] is Character) {
+			bool attacked = false;
+
+		if (combatCreatures [turn] is Character) {
+			if (Input.GetKeyDown (KeyCode.Z)) {
 				combatCreatures [turn].attack (combatEnemies [targetSelection]);
-				Debug.Log (combatCreatures [turn] + " attacks " + combatEnemies [targetSelection] + " for " + combatCreatures [turn].attackDmg + " damage!");
+				attacked = true;
+				Debug.Log ("regular attack!");
+			} else if (Input.GetKeyDown (KeyCode.X)) {
+				Character c = combatCreatures [turn] as Character;
+				c.specialAttack ();
+				attacked = true;
+				Debug.Log ("special attack!");
+			}
+			if (attacked) {
+				
 				if (combatEnemies [targetSelection].health <= 0) {
 					Debug.Log (combatEnemies [targetSelection] + " is defeated!");
-					GameObject g = combatEnemies[targetSelection].gameObject;
+					GameObject g = combatEnemies [targetSelection].gameObject;
 
-					combatCreatures.RemoveAt (combatCreatures.IndexOf(g.GetComponent<Creature>()));
-					combatEnemies.RemoveAt (combatEnemies.IndexOf(g.GetComponent<Enemy>()));
+					combatCreatures.RemoveAt (combatCreatures.IndexOf (g.GetComponent<Creature> ()));
+					combatEnemies.RemoveAt (combatEnemies.IndexOf (g.GetComponent<Enemy> ()));
 
 					Destroy (g);
 				}
-			} else if (combatCreatures [turn] is Enemy) {
+			}
+		} else if (combatCreatures [turn] is Enemy) {
+			timer += Time.deltaTime;
+			if (timer > 1f) {
+				attacked = true;
+				timer = 0;
 				combatCreatures [turn].attack (party [0]);
 				Debug.Log (combatCreatures [turn] + " attacks " + party [0] + " for " + combatCreatures [turn].attackDmg + " damage!");
 				if (party [0].health <= 0) {
 					Debug.Log (party [0] + " is defeated! : (");
 					GameObject p = party [0].gameObject;
-					combatCreatures.RemoveAt (combatCreatures.IndexOf(p.GetComponent<Creature>()));
-					party.RemoveAt (party.IndexOf(p.GetComponent<Character>()));
+					combatCreatures.RemoveAt (combatCreatures.IndexOf (p.GetComponent<Creature> ()));
+					party.RemoveAt (party.IndexOf (p.GetComponent<Character> ()));
 
 					Destroy (p);
 				}
 			}
+		}
 
+		if (attacked) {
+			
 			turn++;
 			if (turn >= combatCreatures.Count) {
 				turn = 0;
@@ -184,8 +202,8 @@ public class GameManager : MonoBehaviour {
 				inCombat = false;
 				turn = 0;
 			}
-
 		}
+		
 	}
 
 

@@ -16,6 +16,6 @@ public class DemonSlayer : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

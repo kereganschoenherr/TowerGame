@@ -16,6 +16,6 @@ public class Dancer : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

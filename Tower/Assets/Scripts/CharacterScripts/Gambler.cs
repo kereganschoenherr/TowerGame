@@ -16,6 +16,6 @@ public class Gambler : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

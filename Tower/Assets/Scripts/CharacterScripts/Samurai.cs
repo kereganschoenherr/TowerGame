@@ -16,6 +16,6 @@ public class Samurai : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

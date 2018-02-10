@@ -16,6 +16,6 @@ public class PrivateEye : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

@@ -16,6 +16,6 @@ public class Percussionist : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

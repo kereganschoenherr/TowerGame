@@ -16,6 +16,6 @@ public class Scholar : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

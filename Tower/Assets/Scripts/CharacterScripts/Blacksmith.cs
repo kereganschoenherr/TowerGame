@@ -16,6 +16,6 @@ public class Blacksmith : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

@@ -16,6 +16,6 @@ public class Knight: Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

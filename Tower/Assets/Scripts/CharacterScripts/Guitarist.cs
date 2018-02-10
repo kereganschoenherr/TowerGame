@@ -16,6 +16,6 @@ public class Guitarist : Character {
 		
 	}
 	public override void specialAttack(){
-
+		health += 5;
 	}
 }

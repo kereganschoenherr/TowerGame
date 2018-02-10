@@ -7,15 +7,18 @@ public class Violinist : Character {
 
 
 	void Start () {
-		setHealth (healthModifier);
+		setHealth (healthModifier); 
 		
 	}
-	
+
+
+
 	// Update is called once per frame
 	void Update () {
 		
 	}
-	public override void specialAttack(){
 
+	public override void specialAttack(){
+		health += 5;
 	}
 }
