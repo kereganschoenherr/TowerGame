@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   attackDmg: 34
-  speed: 20
+  speed: 100
   healthModifier: 1
 --- !u!212 &212916777188750838
 SpriteRenderer:

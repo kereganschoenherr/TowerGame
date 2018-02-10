@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	public List<Vector3> enemyPositions;
 	public List<Vector3> partyPositions;
 	public int floorsClimbed;
+	public int attackSelection;
 
 	void initialize(){
 		//party = new List<Character> ();
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		
+		attackSelection = 0;
 		gameOver = false;
 		floorsClimbed = 1;
 		camp = new Room ("Camp", true, 0);
@@ -137,6 +138,16 @@ public class GameManager : MonoBehaviour {
 			else if(Input.GetKeyDown(KeyCode.LeftArrow)){
 				targetSelection--;
 			}
+
+			if(Input.GetKeyDown(KeyCode.C)){
+				attackSelection++;
+			}
+
+			Character c = combatCreatures [turn] as Character;
+			if (attackSelection >= c.moveSet.Count) {
+				attackSelection = 0;
+			}
+
 			if (targetSelection < 0) {
 				targetSelection = combatEnemies.Count - 1;
 			}
@@ -154,7 +165,8 @@ public class GameManager : MonoBehaviour {
 				Debug.Log ("regular attack!");
 			} else if (Input.GetKeyDown (KeyCode.X)) {
 				Character c = combatCreatures [turn] as Character;
-				c.specialAttack ();
+				Debug.Log(c.moveSet.Count);
+				c.moveSet[attackSelection] ();
 				attacked = true;
 				Debug.Log ("special attack!");
 			}
@@ -189,7 +201,8 @@ public class GameManager : MonoBehaviour {
 		}
 
 		if (attacked) {
-			
+			targetSelection = 0;
+			attackSelection = 0;
 			turn++;
 			if (turn >= combatCreatures.Count) {
 				turn = 0;
