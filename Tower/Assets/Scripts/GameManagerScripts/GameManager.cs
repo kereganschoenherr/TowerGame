@@ -30,18 +30,13 @@ public class GameManager : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		
 		gameOver = false;
 		floorsClimbed = 1;
 		camp = new Room ("Camp", true, 0);
 		firstLoad (camp);
 		initialize ();
 		turn = 0;
-
-
-		//party.Add (testPlayer.GetComponent<Chef>());
-
-
-
 
 		currentFloor = new Floor (camp);
 
@@ -83,6 +78,7 @@ public class GameManager : MonoBehaviour {
 	}
 	void firstLoad(Room r){
 		currentRoom = r;
+
 		Debug.Log (currentRoom.name);
 		Debug.Log ("Current Floor: " + floorsClimbed);
 	}

@@ -14,7 +14,6 @@ public class Room{
 	public int enemyNum;
 
 
-
 	public Room(string n, bool camp, int enemyNum){
 		this.enemyNum = enemyNum;
 		incoming = new List<Room> ();
@@ -30,5 +29,7 @@ public class Room{
 		enemyReferences = enem;
 		hasCombat = true;
 	}
+
+
 		
 }

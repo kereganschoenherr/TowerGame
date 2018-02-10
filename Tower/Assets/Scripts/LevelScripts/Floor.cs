@@ -31,6 +31,8 @@ public class Floor{
 				r.enemies.Add (r.enemyReferences [Random.Range (0, r.enemyReferences.Count)]);
 			}
 
+
+
 			//once the room r is done being constructed. add it to the floorPlan
 
 			floorPlan.Add (r);
