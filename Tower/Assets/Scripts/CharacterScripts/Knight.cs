@@ -6,11 +6,10 @@ using System;
 public class Knight: Character {
 
 	void Start () {
-		moveSet = new List<Action> ();
-		setHealth (healthModifier);
+		init ();
 		moveSet.Add (() => move1 ());
 		moveSet.Add (() => move2 ());
-		Debug.Log (moveSet.Count);
+
 	}
 
 	// Update is called once per frame
