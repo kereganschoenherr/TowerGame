@@ -202,7 +202,8 @@ public class GameManager : MonoBehaviour {
 				//this is still here for debugging and testing
 				combatCreatures [turn].attack (combatCreatures [targetSelection]);
 				attacked = true;
-				Debug.Log ("regular attack!");
+				Debug.Log(combatCreatures[turn] + " attacks " + combatCreatures[targetSelection] + " for " + combatCreatures[turn].attackDmg + " damage!");
+
 			} else if (Input.GetKeyDown (KeyCode.X)) {
 				//executes a move from the character moveset depending
 				// on what the attackSelection variable is which is scrolled through using the c key
@@ -237,6 +238,10 @@ public class GameManager : MonoBehaviour {
 				if (combatCreatures [i].health <= 0) {
 					GameObject g = combatCreatures [i].gameObject;
 					Debug.Log (combatCreatures [i] + " is defeated!");
+					//HotFix for KILLSKIP bug
+					if(i < turn){
+						turn--;
+					}
 					if (combatCreatures [i] is Enemy) {
 						combatEnemies.RemoveAt (combatEnemies.IndexOf (g.GetComponent<Enemy> ()));
 					} else if (combatCreatures [i] is Character) {
