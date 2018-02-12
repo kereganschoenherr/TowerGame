@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 public class GameManager : MonoBehaviour {
 
 	public Floor currentFloor;
@@ -24,11 +24,15 @@ public class GameManager : MonoBehaviour {
 	public int attackSelection;
 	public GameObject target;
 	public GameObject turnIndicator;
+	public GameObject[] txt;
+	TextMeshProUGUI partyHp;
+
 
 	void initialize(){
 		//initialize lists and then use in start() to make start() easier to look at
 		combatEnemies = new List<Enemy> ();
 		combatCreatures = new List<Creature> ();
+
 
 	}
 
@@ -51,9 +55,17 @@ public class GameManager : MonoBehaviour {
 		ed = GetComponent<EnemyDictionary> ();
 		//randomly instantiate 4 characters and put them into the starting party
 		setupParty ();
+
+
 	}
 	
+	void Awake(){
+		
+			partyHp = txt[0].GetComponent<TextMeshProUGUI> ();
 
+
+
+	}
 	void Update () {
 		//the general game loop
 		if (!gameOver) {
@@ -80,6 +92,10 @@ public class GameManager : MonoBehaviour {
 				}
 			}
 		}
+
+		partyHp.text = party [0].health.ToString ();
+
+
 	}
 	void setupParty(){
 		//helper method to call in start() that randomly sets up a party of four to play test with
@@ -87,7 +103,9 @@ public class GameManager : MonoBehaviour {
 			GameObject g = Instantiate (cd.characters [Random.Range(0,cd.characters.Count)]);
 			g.transform.position = partyPositions [i];
 			party.Add (g.GetComponent<Character>());
+
 		}
+
 	}
 
 	void firstLoad(Room r){
@@ -202,6 +220,7 @@ public class GameManager : MonoBehaviour {
 				//this is still here for debugging and testing
 				combatCreatures [turn].attack (combatCreatures [targetSelection]);
 				attacked = true;
+
 				Debug.Log(combatCreatures[turn] + " attacks " + combatCreatures[targetSelection] + " for " + combatCreatures[turn].attackDmg + " damage!");
 
 			} else if (Input.GetKeyDown (KeyCode.X)) {
@@ -224,6 +243,7 @@ public class GameManager : MonoBehaviour {
 				timer = 0;
 				Enemy e = combatCreatures [turn] as Enemy;
 				e.moveSet [0] ();
+
 				Debug.Log (combatCreatures [turn] + " attacks " + party [0] + " for " + combatCreatures [turn].attackDmg + " damage!");
 
 			}
@@ -247,6 +267,7 @@ public class GameManager : MonoBehaviour {
 						combatEnemies.RemoveAt (combatEnemies.IndexOf (g.GetComponent<Enemy> ()));
 					} else if (combatCreatures [i] is Character) {
 						party.RemoveAt (party.IndexOf (g.GetComponent<Character> ()));
+
 					}
 					combatCreatures.RemoveAt (i);
 					Destroy (g);
