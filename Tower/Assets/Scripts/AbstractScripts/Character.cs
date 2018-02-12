@@ -8,7 +8,7 @@ public abstract class Character : Creature {
 	public static float baseHealth = 100;
 	public float healthModifier;
 	public List<Action> moveSet;
-	public GameManager gm;
+
 
 	public void setHealth(float healthMod){
 		healthModifier = healthMod;

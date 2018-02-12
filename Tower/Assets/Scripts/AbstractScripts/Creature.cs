@@ -7,7 +7,7 @@ abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 
 	public float health;
 	public float attackDmg;
-
+	public GameManager gm;
 	public float speed;
 
 	int IComparable<Creature>.CompareTo(Creature c1){

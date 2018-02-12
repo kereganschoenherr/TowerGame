@@ -222,7 +222,8 @@ public class GameManager : MonoBehaviour {
 			if (timer > 1f) {
 				attacked = true;
 				timer = 0;
-				combatCreatures [turn].attack (party [0]);
+				Enemy e = combatCreatures [turn] as Enemy;
+				e.moveSet [0] ();
 				Debug.Log (combatCreatures [turn] + " attacks " + party [0] + " for " + combatCreatures [turn].attackDmg + " damage!");
 
 			}
