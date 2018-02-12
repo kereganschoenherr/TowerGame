@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Enemy : Creature {
+public abstract class Enemy : Creature {
 
 	public static float baseHealth = 100;
 	public float healthModifier;
@@ -20,4 +20,6 @@ public class Enemy : Creature {
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 	}
 
+	public abstract int chooseAttack ();
+	public abstract int chooseTarget ();
 }

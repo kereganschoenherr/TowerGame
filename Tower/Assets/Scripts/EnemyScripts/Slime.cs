@@ -18,4 +18,8 @@ public class Slime : Enemy {
 	public void move1(){
 		gm.combatCreatures [gm.turn].attack (gm.party [0]);
 	}
+	public override void chooseAttack(){
+	}
+	public override void chooseTarget(){
+	}
 }
