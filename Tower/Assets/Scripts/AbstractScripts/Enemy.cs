@@ -19,7 +19,5 @@ public abstract class Enemy : Creature {
 		moveSet = new List<Action> ();
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 	}
-
-	public abstract int chooseAttack ();
-	public abstract int chooseTarget ();
+		
 }

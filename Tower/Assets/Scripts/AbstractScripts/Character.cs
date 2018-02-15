@@ -13,12 +13,14 @@ public abstract class Character : Creature {
 	public void setHealth(float healthMod){
 		healthModifier = healthMod;
 		health = healthMod * baseHealth;
+		EventManager.enemyDeath += huzzah;
 	}
 
 	public void init(){
 		moveSet = new List<Action> ();
 		setHealth (healthModifier);
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		actionPoints = 3;
 	}
 
 
@@ -36,6 +38,10 @@ public abstract class Character : Creature {
 
 		return false;
 	}
+
+	public void huzzah(){
+		Debug.Log (this.gameObject + " says huzzah!");
+		}
 
 
 

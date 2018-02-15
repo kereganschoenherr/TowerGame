@@ -9,6 +9,7 @@ abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 	public float attackDmg;
 	public GameManager gm;
 	public float speed;
+	public int actionPoints;
 
 	int IComparable<Creature>.CompareTo(Creature c1){
 		
@@ -30,14 +31,5 @@ abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 	public void takeDmg(float dmg){
 		health -= dmg;
 	}
-
-	void Start () {
 		
-	}
-	
-
-	void Update () {
-		
-	}
-
 }

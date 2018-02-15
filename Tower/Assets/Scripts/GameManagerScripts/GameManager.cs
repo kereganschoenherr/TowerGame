@@ -264,6 +264,7 @@ public class GameManager : MonoBehaviour {
 						turn--;
 					}
 					if (combatCreatures [i] is Enemy) {
+						EventManager.onEnemyDeath ();
 						combatEnemies.RemoveAt (combatEnemies.IndexOf (g.GetComponent<Enemy> ()));
 					} else if (combatCreatures [i] is Character) {
 						party.RemoveAt (party.IndexOf (g.GetComponent<Character> ()));

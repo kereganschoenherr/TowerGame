@@ -19,8 +19,5 @@ public class Ghoul : Enemy {
 		gm.combatCreatures [gm.turn].attack (gm.party [0]);
 	}
 
-	public override void chooseAttack(){
-	}
-	public override void chooseTarget(){
-	}
+
 }
