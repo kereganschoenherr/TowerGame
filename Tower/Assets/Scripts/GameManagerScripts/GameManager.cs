@@ -26,18 +26,21 @@ public class GameManager : MonoBehaviour {
 	public GameObject turnIndicator;
 	public GameObject[] txt;
 	TextMeshProUGUI partyHp;
+	public bool turnOver;
+	public CombatStateMachine csm;
 
 
 	void initialize(){
 		//initialize lists and then use in start() to make start() easier to look at
 		combatEnemies = new List<Enemy> ();
 		combatCreatures = new List<Creature> ();
-
+		csm = GetComponent<CombatStateMachine> ();
 
 	}
 
 	void Start () {
-		
+		csm = GetComponent<CombatStateMachine> ();
+		turnOver = false;
 		attackSelection = 0;
 		gameOver = false;
 		floorsClimbed = 1;
@@ -88,7 +91,8 @@ public class GameManager : MonoBehaviour {
 				}
 				//generic combat check. If in combat, run general combat procedure until combat ends
 				if (inCombat) {
-					runCombat ();
+					//runCombat ();
+					csm.runCombat();
 				}
 			}
 		}
@@ -211,15 +215,14 @@ public class GameManager : MonoBehaviour {
 
 
 		// this boolean determines if an attack occurred
-			bool attacked = false;
+		 turnOver = false;
 
 		//you can press either z or x while it is a party members turn
 		if (combatCreatures [turn] is Character) {
 			if (Input.GetKeyDown (KeyCode.Z)) {
 				//executes a basic attack on any Creature (even friendly targets)
 				//this is still here for debugging and testing
-				combatCreatures [turn].attack (combatCreatures [targetSelection]);
-				attacked = true;
+			//	combatCreatures [turn].attack (combatCreatures [targetSelection]);
 
 				Debug.Log(combatCreatures[turn] + " attacks " + combatCreatures[targetSelection] + " for " + combatCreatures[turn].attackDmg + " damage!");
 
@@ -228,8 +231,8 @@ public class GameManager : MonoBehaviour {
 				// on what the attackSelection variable is which is scrolled through using the c key
 				//in the future, all moves will be chosen through the moveSet
 				Character c = combatCreatures [turn] as Character;
-				c.moveSet[attackSelection] ();
-				attacked = true;
+//				c.moveSet[attackSelection] ();
+
 				Debug.Log ("moveset attack!");
 			}
 
@@ -239,7 +242,7 @@ public class GameManager : MonoBehaviour {
 			// and other targetSelection AI
 			timer += Time.deltaTime;
 			if (timer > 1f) {
-				attacked = true;
+
 				timer = 0;
 				Enemy e = combatCreatures [turn] as Enemy;
 				e.moveSet [0] ();
@@ -249,7 +252,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		if (attacked) {
+		if (turnOver) {
 			// attacked will be true if someone did a move
 			// this currently happens to always corresponds to a turn, perhaps it might not always in the future
 			// in which case this for loop should be called according to a more general condition, but its fine for now

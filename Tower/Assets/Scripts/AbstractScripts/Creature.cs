@@ -10,6 +10,7 @@ abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 	public GameManager gm;
 	public float speed;
 	public int actionPoints;
+	public bool alive;
 
 	int IComparable<Creature>.CompareTo(Creature c1){
 		

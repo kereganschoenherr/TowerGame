@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 1759962088}
   - component: {fileID: 1759962091}
   - component: {fileID: 1759962090}
+  - component: {fileID: 1759962092}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1083,6 +1084,8 @@ MonoBehaviour:
   - {fileID: 1175052286}
   - {fileID: 557670788}
   - {fileID: 1259873682}
+  turnOver: 0
+  csm: {fileID: 0}
 --- !u!4 &1759962089
 Transform:
   m_ObjectHideFlags: 0
@@ -1137,6 +1140,35 @@ MonoBehaviour:
   - {fileID: 1669386765166666, guid: 4539351754ef47e4eba12d95b0478f96, type: 2}
   - {fileID: 1669386765166666, guid: ba98d35c985cabe4d98ab905300d25f3, type: 2}
   - {fileID: 1669386765166666, guid: 31a7b62484204734697f019d059fe12e, type: 2}
+--- !u!114 &1759962092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1759962087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5059f95b20fddff429593f0ce4e6aded, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gm: {fileID: 0}
+  combatSetup: 0
+  chooseTurn: 0
+  chooseAbility: 0
+  chooseAbilityTargets: 0
+  enemyTurn: 0
+  combatOver: 0
+  combatEnemies: []
+  party: []
+  combatCreatures: []
+  activeCharacter: {fileID: 0}
+  activeEnemy: {fileID: 0}
+  moveSelection: 0
+  targetsAdded: 0
+  targetSelection: 0
+  currentActionPoints: 0
+  turn: 0
+  timer: 0
 --- !u!1 &2037671331
 GameObject:
   m_ObjectHideFlags: 0

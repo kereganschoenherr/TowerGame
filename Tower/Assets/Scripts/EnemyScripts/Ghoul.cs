@@ -17,6 +17,7 @@ public class Ghoul : Enemy {
 
 	public void move1(){
 		gm.combatCreatures [gm.turn].attack (gm.party [0]);
+		gm.turnOver = true;
 	}
 
 

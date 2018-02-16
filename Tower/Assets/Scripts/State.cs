@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-abstract public class SingleTarget : Ability {
-	public Creature target;
+abstract public class State{
+	public GameManager gm;
+	abstract public void run();
+
 }

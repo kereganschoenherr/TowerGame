@@ -7,20 +7,22 @@ public abstract class Character : Creature {
 
 	public static float baseHealth = 100;
 	public float healthModifier;
-	public List<Action> moveSet;
+	public List<Ability> moveSet;
 
 
 	public void setHealth(float healthMod){
 		healthModifier = healthMod;
 		health = healthMod * baseHealth;
-		EventManager.enemyDeath += huzzah;
+
 	}
 
 	public void init(){
-		moveSet = new List<Action> ();
+		moveSet = new List<Ability> ();
 		setHealth (healthModifier);
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		actionPoints = 3;
+		EventManager.enemyDeath += huzzah;
+		alive = true;
 	}
 
 

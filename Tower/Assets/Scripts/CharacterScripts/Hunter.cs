@@ -9,8 +9,6 @@ public class Hunter : Character {
 
 	void Start () {
 		init ();
-		moveSet.Add (() => move1 ());
-		moveSet.Add (() => move2 ());
 
 	}
 

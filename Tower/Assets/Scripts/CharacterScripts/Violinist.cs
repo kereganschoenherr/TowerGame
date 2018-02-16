@@ -9,8 +9,7 @@ public class Violinist : Character {
 
 	void Start () {
 		init ();
-		moveSet.Add (() => move1 ());
-		moveSet.Add (() => move2 ());
+
 
 	}
 
@@ -19,13 +18,7 @@ public class Violinist : Character {
 
 	}
 
-	public void move1(){
-		speed += 7;
-	}
 
-	public void move2(){
-		health += 17;
-	}
 
 
 }

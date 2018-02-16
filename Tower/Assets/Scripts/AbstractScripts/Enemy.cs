@@ -18,6 +18,7 @@ public abstract class Enemy : Creature {
 		setHealth (healthModifier);
 		moveSet = new List<Action> ();
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		alive = true;
 	}
 		
 }
