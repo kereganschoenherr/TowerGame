@@ -7,7 +7,7 @@ public abstract class Enemy : Creature {
 
 	public static float baseHealth = 100;
 	public float healthModifier;
-	public List<Action> moveSet;
+
 
 	public void setHealth(float healthMod){
 		healthModifier = healthMod;
@@ -16,9 +16,11 @@ public abstract class Enemy : Creature {
 
 	public void init(){
 		setHealth (healthModifier);
-		moveSet = new List<Action> ();
+
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		alive = true;
 	}
+
+
 		
 }

@@ -20,7 +20,7 @@ public abstract class Character : Creature {
 		moveSet = new List<Ability> ();
 		setHealth (healthModifier);
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		actionPoints = 3;
+		actionPoints = 1;
 		EventManager.enemyDeath += huzzah;
 		alive = true;
 	}

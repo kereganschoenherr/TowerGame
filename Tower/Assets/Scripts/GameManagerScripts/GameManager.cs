@@ -91,7 +91,6 @@ public class GameManager : MonoBehaviour {
 				}
 				//generic combat check. If in combat, run general combat procedure until combat ends
 				if (inCombat) {
-					//runCombat ();
 					csm.runCombat();
 				}
 			}
@@ -104,7 +103,7 @@ public class GameManager : MonoBehaviour {
 	void setupParty(){
 		//helper method to call in start() that randomly sets up a party of four to play test with
 		for (int i = 0; i < 4; i++) {
-			GameObject g = Instantiate (cd.characters [Random.Range(0,cd.characters.Count)]);
+			GameObject g = Instantiate (cd.chef);
 			g.transform.position = partyPositions [i];
 			party.Add (g.GetComponent<Character>());
 
@@ -130,15 +129,13 @@ public class GameManager : MonoBehaviour {
 		combatCreatures.Clear ();
 		combatEnemies.Clear ();
 
-
-
-
 		//current room now gets updated
 		currentRoom = r;
 
 		//let gamemanager know if combat should be started in this room
 		if (currentRoom.hasCombat) {
 			inCombat = true;
+			csm.combatSetup = true;
 		} else {
 			inCombat = false;
 		}
@@ -151,156 +148,9 @@ public class GameManager : MonoBehaviour {
 			Debug.Log ("Current Floor: " + floorsClimbed);
 		}
 
-		//if a room has combat in it, load in and initialize the enemies that go with that room
-		//this involves: creating their respective gameobject, putting them somewhere on screen according to the list of vector3s,
-		// and add them to the combat enemies list
-		if (currentRoom.hasCombat) {
-			for (int i = 0; i < currentRoom.enemyNum; i++) {
-				GameObject g = Instantiate (currentRoom.enemies[i]);
-				g.transform.position = enemyPositions [i];
-				combatEnemies.Add (g.GetComponent<Enemy> ());
-			}
-		}
-
-		//now add everybody who will be participating in glorious combat to the combatCreatures list!
-		for(int i = 0; i < combatEnemies.Count; i++){
-			combatCreatures.Add (combatEnemies[i]);
-		}
-
-		for(int i = 0; i < party.Count; i++){
-			combatCreatures.Add (party[i]);
-		}
-
-		//sort the everybody by speed stat, the primitive metric we currently use to control turns.
-		//The sorting implementation can be found in Creature class
-		combatCreatures.Sort ();
-
 	}
 
-	void runCombat(){
-		//this is the general combat loop that controls all combat scenarios
 
-		//put the turn indicator over the correct creature
-		turnIndicator.transform.position = new Vector3 (combatCreatures[turn].gameObject.transform.position.x, combatCreatures[turn].gameObject.transform.position.y + 2f, 2f);
-
-		//change targetSelection with right and left arrow keys, the variable which controls aiming 
-
-		if (combatCreatures [turn] is Character) {
-			if(Input.GetKeyDown(KeyCode.RightArrow)){
-				targetSelection++;
-			}
-			else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-				targetSelection--;
-			}
-
-			if(Input.GetKeyDown(KeyCode.C)){
-				attackSelection++;
-			}
-
-			Character c = combatCreatures [turn] as Character;
-		//also change what attack the character is going to use using the c key
-			if (attackSelection >= c.moveSet.Count) {
-				attackSelection = 0;
-			}
-
-			if (targetSelection < 0) {
-				targetSelection = combatCreatures.Count - 1;
-			}
-			else if(targetSelection >= combatCreatures.Count){
-				targetSelection = 0;
-			}
-		}
-		//put the target indicator over the correct creature, this is the creature the player is aiming at
-		target.transform.position = new Vector3 (combatCreatures[targetSelection].gameObject.transform.position.x, combatCreatures[targetSelection].gameObject.transform.position.y + 1f, 2f);
-
-
-		// this boolean determines if an attack occurred
-		 turnOver = false;
-
-		//you can press either z or x while it is a party members turn
-		if (combatCreatures [turn] is Character) {
-			if (Input.GetKeyDown (KeyCode.Z)) {
-				//executes a basic attack on any Creature (even friendly targets)
-				//this is still here for debugging and testing
-			//	combatCreatures [turn].attack (combatCreatures [targetSelection]);
-
-				Debug.Log(combatCreatures[turn] + " attacks " + combatCreatures[targetSelection] + " for " + combatCreatures[turn].attackDmg + " damage!");
-
-			} else if (Input.GetKeyDown (KeyCode.X)) {
-				//executes a move from the character moveset depending
-				// on what the attackSelection variable is which is scrolled through using the c key
-				//in the future, all moves will be chosen through the moveSet
-				Character c = combatCreatures [turn] as Character;
-//				c.moveSet[attackSelection] ();
-
-				Debug.Log ("moveset attack!");
-			}
-
-		} else if (combatCreatures [turn] is Enemy) {
-			// if it is the enemies turn, wait one second, then basic attack the 0th party member.
-			//in the future, all enemies will also have a moveSet
-			// and other targetSelection AI
-			timer += Time.deltaTime;
-			if (timer > 1f) {
-
-				timer = 0;
-				Enemy e = combatCreatures [turn] as Enemy;
-				e.moveSet [0] ();
-
-				Debug.Log (combatCreatures [turn] + " attacks " + party [0] + " for " + combatCreatures [turn].attackDmg + " damage!");
-
-			}
-		}
-
-		if (turnOver) {
-			// attacked will be true if someone did a move
-			// this currently happens to always corresponds to a turn, perhaps it might not always in the future
-			// in which case this for loop should be called according to a more general condition, but its fine for now
-
-			//check to see if any Creature died. If they did clean them up from all the correct lists, destroy them, and pay your respects
-			for (int i = 0; i < combatCreatures.Count; i++) {
-				if (combatCreatures [i].health <= 0) {
-					GameObject g = combatCreatures [i].gameObject;
-					Debug.Log (combatCreatures [i] + " is defeated!");
-					//HotFix for KILLSKIP bug
-					if(i < turn){
-						turn--;
-					}
-					if (combatCreatures [i] is Enemy) {
-						EventManager.onEnemyDeath ();
-						combatEnemies.RemoveAt (combatEnemies.IndexOf (g.GetComponent<Enemy> ()));
-					} else if (combatCreatures [i] is Character) {
-						party.RemoveAt (party.IndexOf (g.GetComponent<Character> ()));
-
-					}
-					combatCreatures.RemoveAt (i);
-					Destroy (g);
-				}
-			}
-
-			//reset the target and attack move selections back to 0 after an attack
-			targetSelection = 0;
-			attackSelection = 0;
-
-			//increment turn
-			//! note ! if a person in combatCreatures kills someone lower in the list, it skips over the next person's turn
-		
-			turn++;
-			if (turn >= combatCreatures.Count) {
-				turn = 0;
-			}
-
-		}
-
-		//if combat should end, let gamemanager know and send indicators back to the top left corner so its easy to tell
-		if (combatEnemies.Count == 0 || party.Count == 0) {
-			inCombat = false;
-			target.transform.position = new Vector3 (-11.82f, 4.45f, 2f);
-			turnIndicator.transform.position = new Vector3 (-11.04f, 4.45f, 2f);
-			turn = 0;
-		}
-		
-	}
 
 
 }

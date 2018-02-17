@@ -54,7 +54,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   attackDmg: 34
+  gm: {fileID: 0}
   speed: 30
+  actionPoints: 1
+  alive: 0
   healthModifier: 1
 --- !u!212 &212916777188750838
 SpriteRenderer:

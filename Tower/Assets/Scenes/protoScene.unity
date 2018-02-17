@@ -1140,6 +1140,7 @@ MonoBehaviour:
   - {fileID: 1669386765166666, guid: 4539351754ef47e4eba12d95b0478f96, type: 2}
   - {fileID: 1669386765166666, guid: ba98d35c985cabe4d98ab905300d25f3, type: 2}
   - {fileID: 1669386765166666, guid: 31a7b62484204734697f019d059fe12e, type: 2}
+  chef: {fileID: 1669386765166666, guid: 40ad2043568cdb94baecfc61e0631e28, type: 2}
 --- !u!114 &1759962092
 MonoBehaviour:
   m_ObjectHideFlags: 0

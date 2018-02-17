@@ -9,6 +9,8 @@ public class Chef : Character {
 
 	void Start () {
 		init ();
+		moveSet.Add (new basicDmg());
+		moveSet.Add (new killDmg());
 
 	}
 

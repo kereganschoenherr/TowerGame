@@ -7,7 +7,7 @@ public class Ghoul : Enemy {
 	// Use this for initialization
 	void Start () {
 		init ();
-		moveSet.Add (() => move1 ());
+
 	}
 	
 	// Update is called once per frame
@@ -15,10 +15,7 @@ public class Ghoul : Enemy {
 		
 	}
 
-	public void move1(){
-		gm.combatCreatures [gm.turn].attack (gm.party [0]);
-		gm.turnOver = true;
-	}
+
 
 
 }
