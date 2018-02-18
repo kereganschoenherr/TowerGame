@@ -58,8 +58,8 @@ public class CombatStateMachine : MonoBehaviour {
 
 	}
 
-	// Welcome to the state machine that controls combat! In GameManager, when inCombat is true, runCombat will run
-	// the runCombat function emulates a state machine by a short control flow of else-if statements. There are 6 states
+	// Welcome to the state machine that controls combat! In GameManager, when inCombat is true, runCombat will run.
+	// The runCombat function emulates a state machine by a short control flow of else-if statements. There are 6 states
 	// currently, and each state has its own varaiable to represent it in the else-if blocks.
 	//NEVER should any two booleans in this set be true at the same time. It is up to the programmer to make sure that
 	// the varaibles are handled correctly. This system could have been made more fool proof, but the game so far isn't really
@@ -168,15 +168,17 @@ public class CombatStateMachine : MonoBehaviour {
 		//this involves: creating their respective gameobject, putting them somewhere on screen according to the list of vector3s,
 		// and add them to the combat enemies list
 
+		//set up the combat variables for a new round of combat
 		combatSetupInit();
 
-
+		//access GameManager and load in the room's enemies
 		for (int i = 0; i < gm.currentRoom.enemyNum; i++) {
 			GameObject g = Instantiate (gm.currentRoom.enemies[i]);
 			g.transform.position = gm.enemyPositions [i];
 			combatEnemies.Add (g.GetComponent<Enemy> ());
 		}
 
+		//load in the party from GameManager
 		party = gm.party;
 
 		//now add everybody who will be participating in glorious combat to the combatCreatures list!
@@ -197,6 +199,10 @@ public class CombatStateMachine : MonoBehaviour {
 	}
 
 	public void chooseturn(){
+		
+		//chooseTurn: hub for in between turn stuff, and its also the first state entered after combatSetup
+
+		//check for people dying!
 		for (int i = 0; i < combatCreatures.Count; i++) {
 			if (combatCreatures [i].health <= 0 && combatCreatures [i].alive) {
 
@@ -220,6 +226,8 @@ public class CombatStateMachine : MonoBehaviour {
 			}
 		}
 
+		//check for the fight being over
+		//we don't have game over yet
 		if (combatEnemies.Count == enemiesDead || party.Count == charactersDead) {
 			
 			gm.target.transform.position = new Vector3 (-11.82f, 4.45f, 2f);
@@ -231,13 +239,17 @@ public class CombatStateMachine : MonoBehaviour {
 			return;
 		}
 
+		//the all important 'turn' variable. look at it. so simple. one incremetation. yet so pivotal.
 		turn++;
 		if (turn >= combatCreatures.Count) {
 			turn = 0;
 		}
 
+		//reset creatures, i am not sure if this NEEDS to be here, but i was ascared of bugs
 		activeEnemy = null;
 		activeCharacter = null;
+
+		//if an enemy comes next, go the the enemyTurn state, where the enemy will do something evil probably
 		if (combatCreatures [turn] is Enemy) {
 			activeEnemy = combatCreatures [turn] as Enemy;
 			if (activeEnemy.alive) {
@@ -247,6 +259,7 @@ public class CombatStateMachine : MonoBehaviour {
 				enemyTurn = true;
 			}
 		} else {
+			//or if a character comes next, go to chooseAbility state, with currentActionPoints being updated
 			activeCharacter = combatCreatures [turn] as Character;
 			if (activeCharacter.alive) {
 				gm.turnIndicator.transform.position = new Vector3 (activeCharacter.gameObject.transform.position.x, activeCharacter.gameObject.transform.position.y + 2f, 2f);
@@ -259,7 +272,9 @@ public class CombatStateMachine : MonoBehaviour {
 
 	}
 	public void chooseability(){
-
+		// this state takes left/right as inputs to change ability selectio
+		//use 's' key to skip for now but I haven't tested it
+		//enter selects the current ability IF you have the appropriate amount of action points left
 		if(Input.GetKeyDown(KeyCode.RightArrow)){
 			moveSelection++;
 		} 
@@ -289,7 +304,9 @@ public class CombatStateMachine : MonoBehaviour {
 		}
 	}
 	public void chooseabilitytargets(){
-
+		//here you can choose some targts and then run the chosen ability
+		//this state takes left/right input to choose targets, enter to select them
+		//upon selecting the last target, the ability fires, IF it passes the Ability.verify() call, which should be custom for every ability
 		if(Input.GetKeyDown(KeyCode.RightArrow)){
 			targetSelection++;
 		} 
@@ -342,6 +359,7 @@ public class CombatStateMachine : MonoBehaviour {
 		}
 	}
 	public void enemyturn(){
+		//run some AI so enemy does something, then go back to choose turn
 		timer += Time.deltaTime;
 		if (timer > 1f) {
 
@@ -357,6 +375,7 @@ public class CombatStateMachine : MonoBehaviour {
 		}
 	}
 	public void combatover(){
+		//clean everything up, combat's ended, move along, nothing to see here etc. etc.
 		for (int i = 0; i < combatEnemies.Count; i++) {
 			Destroy(combatEnemies [i].gameObject);
 		}
@@ -379,6 +398,7 @@ public class CombatStateMachine : MonoBehaviour {
 
 
 	void combatSetupInit(){
+		//here are some important variables getting intialized
 		enemiesDead = 0;
 		charactersDead = 0;
 
