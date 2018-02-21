@@ -272,9 +272,11 @@ public class CombatStateMachine : MonoBehaviour {
 
 	}
 	public void chooseability(){
+		
 		// this state takes left/right as inputs to change ability selectio
 		//use 's' key to skip for now but I haven't tested it
 		//enter selects the current ability IF you have the appropriate amount of action points left
+		targetSelection = 0;
 		if(Input.GetKeyDown(KeyCode.RightArrow)){
 			moveSelection++;
 		} 
@@ -304,22 +306,37 @@ public class CombatStateMachine : MonoBehaviour {
 		}
 	}
 	public void chooseabilitytargets(){
-		//here you can choose some targts and then run the chosen ability
+		//here you can choose some targets and then run the chosen ability
 		//this state takes left/right input to choose targets, enter to select them
 		//upon selecting the last target, the ability fires, IF it passes the Ability.verify() call, which should be custom for every ability
 		if(Input.GetKeyDown(KeyCode.RightArrow)){
-			targetSelection++;
-		} 
-		else if(Input.GetKeyDown(KeyCode.LeftArrow)){
-			targetSelection--;
+			do {
+				
+				targetSelection++;
+				if (targetSelection >= combatCreatures.Count) {
+					targetSelection = 0;
+				}
+			} while(!combatCreatures [targetSelection].alive);
 		}
+		
+		else if(Input.GetKeyDown(KeyCode.LeftArrow)){
+			do {
+				
+				targetSelection--;
+				if (targetSelection < 0) {
+					targetSelection = combatCreatures.Count -1;
+				}
+			} while(!combatCreatures [targetSelection].alive);
+
+		}
+		/*
 		if (targetSelection < 0) {
 			targetSelection = combatCreatures.Count - 1;
 		}
 		else if(targetSelection >= combatCreatures.Count){
 			targetSelection = 0;
 		}
-
+*/
 		gm.target.transform.position = new Vector3 (combatCreatures[targetSelection].gameObject.transform.position.x, combatCreatures[targetSelection].gameObject.transform.position.y + 1f, 2f);
 
 		if (targetsAdded < chosenAbility.targetNum) {
@@ -357,6 +374,7 @@ public class CombatStateMachine : MonoBehaviour {
 			}
 
 		}
+
 	}
 	public void enemyturn(){
 		//run some AI so enemy does something, then go back to choose turn
