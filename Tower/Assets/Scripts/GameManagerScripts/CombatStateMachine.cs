@@ -343,13 +343,16 @@ public class CombatStateMachine : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Return)) {
 				targetsAdded += 1;
 				chosenAbility.targets.Add (combatCreatures [targetSelection]);
+				targetSelection = 0;
 			}
 		} else {
+			//if ability passes verify check, run the ability and decide some things
 			if (chosenAbility.verify ()) {
 				chosenAbility.useAbility ();
+				targetsAdded = 0;
 				currentActionPoints -= chosenAbility.actionCost;
 				int min = 100;
-				for(int i = 0; i < activeCharacter.moveSet.Count; i++){
+				for (int i = 0; i < activeCharacter.moveSet.Count; i++) {
 					if (min > activeCharacter.moveSet [i].actionCost) {
 						min = activeCharacter.moveSet [i].actionCost;
 					}
@@ -358,19 +361,24 @@ public class CombatStateMachine : MonoBehaviour {
 				if (min <= currentActionPoints) {
 					Debug.Log ("choose another ability");
 					targetsAdded = 0;
+					targetSelection = 0;
 					gm.target.transform.position = new Vector3 (-11.82f, 4.45f, 2f);
 					chooseAbilityTargets = false;
 					chooseAbility = true;
 				} else {
 					Debug.Log ("choose turn");
+					targetSelection = 0;
 					targetsAdded = 0;
 					gm.target.transform.position = new Vector3 (-11.82f, 4.45f, 2f);
 					chooseAbilityTargets = false;
 					chooseTurn = true;
 
 				}
+				//////////// if the ability doesn't pass verify, clear the targets list and essentially start this state over
 
-
+			} else {
+				targetsAdded = 0;
+				chosenAbility.targets.Clear ();
 			}
 
 		}
