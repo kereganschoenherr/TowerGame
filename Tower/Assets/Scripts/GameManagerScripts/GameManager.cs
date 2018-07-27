@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+//using TMPro;
 public class GameManager : MonoBehaviour {
 
 	public Floor currentFloor;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject target;
 	public GameObject turnIndicator;
 	public GameObject[] txt;
-	TextMeshProUGUI partyHp;
+	//TextMeshProUGUI partyHp;
 	public bool turnOver;
 	public CombatStateMachine csm;
 
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
 	
 	void Awake(){
 		
-			partyHp = txt[0].GetComponent<TextMeshProUGUI> ();
+		//	partyHp = txt[0].GetComponent<TextMeshProUGUI> ();
 
 
 
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour {
 			}
 		}
 
-		partyHp.text = party [0].health.ToString ();
+	//	partyHp.text = party [0].health.ToString ();
 
 
 	}
