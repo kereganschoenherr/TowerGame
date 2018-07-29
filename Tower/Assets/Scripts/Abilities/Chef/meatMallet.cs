@@ -12,14 +12,13 @@ public class meatMallet : Ability {
 
 	public override void useAbility ()
 	{
-
 		targets [0].takeDmg (2);
 		targets.Clear ();
 	}
 
 	public override bool verify ()
 	{
-		return true;
+        return assertEnemyTarget(0);
 	}
 
 

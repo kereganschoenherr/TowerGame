@@ -24,5 +24,7 @@ public class Blacksmith : Character {
 	public void move2(){
 		health += 17;
 	}
-
+    public override void turnStart()
+    {
+    }
 }

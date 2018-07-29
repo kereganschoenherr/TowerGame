@@ -20,11 +20,9 @@ public class basicDmg : Ability {
 
 	public override bool verify ()
 	{
-		if (targets [0] is Enemy && targets [1] is Enemy) {
-			return true;
-		}
-		return false;
-	}
+        return assertEnemyTarget(0) && assertEnemyTarget(1);
+
+    }
 
 
 }

@@ -15,7 +15,9 @@ public class Ghoul : Enemy {
 		
 	}
 
-
+    public override void turnStart()
+    {
+    }
 
 
 }

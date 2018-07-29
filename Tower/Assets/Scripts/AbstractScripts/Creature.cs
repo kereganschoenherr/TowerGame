@@ -29,8 +29,10 @@ abstract public class Creature : MonoBehaviour, IComparable<Creature>{
 		c.takeDmg (attackDmg);
 	}
 
-	public void takeDmg(float dmg){
+	public virtual void takeDmg(float dmg){
 		health -= dmg;
 	}
+
+    public abstract void turnStart();
 		
 }

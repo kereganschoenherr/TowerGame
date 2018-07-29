@@ -8,8 +8,8 @@ public class CombatStateMachine : MonoBehaviour {
 	//list of states
 	//these bools are carefully handled to model a state machine, with each block of the if/else chain representing a state
 	//the if/else blocks have code that link the states in a meaningful way
-	//now each 'state' will react to keyboard input differently and can only transition to certain other states
-	//the game so far is not complicated enough to warrent more robust or object-oriented state management
+	//each 'state' will react to keyboard input differently and can only transition to certain other states
+	//the game so far is not complicated enough to warrent more robust or object-oriented state management, and may never be
 	public bool combatSetup;
 	public bool chooseTurn;
 	public bool chooseAbility;
@@ -245,15 +245,17 @@ public class CombatStateMachine : MonoBehaviour {
 			turn = 0;
 		}
 
-		//reset creatures, i am not sure if this NEEDS to be here, but i was ascared of bugs
+		//reset creature references, i am not sure if this NEEDS to be here, but i was ascared of bugs
 		activeEnemy = null;
 		activeCharacter = null;
 
 		//if an enemy comes next, go the the enemyTurn state, where the enemy will do something evil probably
 		if (combatCreatures [turn] is Enemy) {
 			activeEnemy = combatCreatures [turn] as Enemy;
+            
 			if (activeEnemy.alive) {
-				gm.turnIndicator.transform.position = new Vector3 (activeEnemy.gameObject.transform.position.x, activeEnemy.gameObject.transform.position.y + 2f, 2f);
+                activeEnemy.turnStart();
+                gm.turnIndicator.transform.position = new Vector3 (activeEnemy.gameObject.transform.position.x, activeEnemy.gameObject.transform.position.y + 2f, 2f);
 				Debug.Log ("enemy turn");
 				chooseTurn = false;
 				enemyTurn = true;
@@ -262,6 +264,7 @@ public class CombatStateMachine : MonoBehaviour {
 			//or if a character comes next, go to chooseAbility state, with currentActionPoints being updated
 			activeCharacter = combatCreatures [turn] as Character;
 			if (activeCharacter.alive) {
+                activeCharacter.turnStart();
 				gm.turnIndicator.transform.position = new Vector3 (activeCharacter.gameObject.transform.position.x, activeCharacter.gameObject.transform.position.y + 2f, 2f);
 				Debug.Log ("choose ability");
 				currentActionPoints = activeCharacter.actionPoints;
@@ -273,7 +276,7 @@ public class CombatStateMachine : MonoBehaviour {
 	}
 	public void chooseability(){
 		
-		// this state takes left/right as inputs to change ability selectio
+		// this state takes left/right as inputs to change ability selection
 		//use 's' key to skip for now but I haven't tested it
 		//enter selects the current ability IF you have the appropriate amount of action points left
 		targetSelection = 0;
@@ -379,6 +382,7 @@ public class CombatStateMachine : MonoBehaviour {
 			} else {
 				targetsAdded = 0;
 				chosenAbility.targets.Clear ();
+                Debug.Log("you chose incorrect targets!");
 			}
 
 		}
@@ -386,6 +390,7 @@ public class CombatStateMachine : MonoBehaviour {
 	}
 	public void enemyturn(){
 		//run some AI so enemy does something, then go back to choose turn
+        //currently they just whoever occupies the first spot in the party
 		timer += Time.deltaTime;
 		if (timer > 1f) {
 

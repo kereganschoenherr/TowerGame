@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 	void setupParty(){
 		//helper method to call in start() that randomly sets up a party of four to play test with
 		for (int i = 0; i < 4; i++) {
-			GameObject g = Instantiate (cd.chef);
+			GameObject g = Instantiate (cd.samurai);
 			g.transform.position = partyPositions [i];
 			party.Add (g.GetComponent<Character>());
 

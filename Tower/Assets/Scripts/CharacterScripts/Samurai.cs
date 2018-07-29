@@ -5,10 +5,16 @@ using System;
 
 public class Samurai : Character {
 
-
+    public bool dodge;
 
 	void Start () {
 		init ();
+        dodge = false;
+        moveSet.Add(new dodge(this));
+        moveSet.Add(new killingBlow());
+        moveSet.Add(new multiAttack());
+        moveSet.Add(new trueStrike());
+        
 
 	}
 
@@ -17,12 +23,24 @@ public class Samurai : Character {
 
 	}
 
-	public void move1(){
-		speed += 7;
-	}
+	
 
-	public void move2(){
-		health += 17;
-	}
+    public override void takeDmg(float dmg) {
+        if (dodge){
+            health -= dmg * .2f;
+            dodge = false;
+        }
+        else{
+            health -= dmg;
+        }
+
+        
+    }
+
+    public override void turnStart() {
+        dodge = false;
+    }
+    
+
 
 }

@@ -16,11 +16,7 @@ public class Priest : Character {
 
 	}
 
-	public void move1(){
-		speed += 7;
-	}
-
-	public void move2(){
-		health += 17;
-	}
+    public override void turnStart()
+    {
+    }
 }

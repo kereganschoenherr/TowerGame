@@ -25,22 +25,6 @@ public abstract class Character : Creature {
 		alive = true;
 	}
 
-
-	public bool assertCharacterTarget(){
-		if (gm.combatCreatures [gm.targetSelection] is Character) {
-			return true;
-		}
-		return false;
-	}
-
-	public bool assertEnemyTarget(){
-		if(gm.combatCreatures[gm.targetSelection] is Enemy){
-			return true;
-		}
-
-		return false;
-	}
-
 	public void huzzah(){
 		Debug.Log (this.gameObject + " says huzzah!");
 		}
