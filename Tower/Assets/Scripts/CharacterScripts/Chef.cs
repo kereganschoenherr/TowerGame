@@ -10,6 +10,7 @@ public class Chef : Character {
 		moveSet.Add (new basicDmg());
 		moveSet.Add (new killDmg());
 		moveSet.Add (new meatMallet ());
+        moveSet.Add (new Shield());
 
 	}
 

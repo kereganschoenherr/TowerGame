@@ -18,6 +18,7 @@ public abstract class Character : Creature {
 
 	public void init(){
 		moveSet = new List<Ability> ();
+        effectList = new List<Effect>();
 		setHealth (healthModifier);
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		actionPoints = 1;

@@ -7,6 +7,7 @@ public class Knight: Character {
 
 	void Start () {
 		init ();
+        moveSet.Add(new Shield());
 
 	}
 

@@ -16,7 +16,7 @@ public abstract class Enemy : Creature {
 
 	public void init(){
 		setHealth (healthModifier);
-
+        effectList = new List<Effect>();
 		gm = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		alive = true;
 	}
